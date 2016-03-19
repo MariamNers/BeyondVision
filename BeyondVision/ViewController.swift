@@ -1,25 +1,42 @@
-//
-//  ViewController.swift
-//  BeyondVision
-//
-//  Created by Mariam Nersisyan on 05/03/2016.
-//  Copyright © 2016 MariamN. All rights reserved.
-//
-
 import UIKit
+import ChameleonFramework
 
-class ViewController: UIViewController {
 
+class ViewController : UIViewController{
+    @IBOutlet weak var textView: UITextView!
+
+    @IBOutlet weak var myButton: UIButton!
+    
+    
+    @IBOutlet weak var navigation: UINavigationItem!
     override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+
+        self.navigationController?.hidesNavigationBarHairline = true
+
+        
+        navigationController?.navigationBar.barTintColor = UIColor.flatSandColor()
+
+
+        
+
+        view.backgroundColor = UIColor.flatSandColor()
+        
+        textView?.userInteractionEnabled = true
+        textView?.editable = false
+        
+        textView?.backgroundColor = UIColor.clearColor()
+        
+        myButton?.layer.cornerRadius = 10;
+        myButton?.clipsToBounds = true;
+        
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+   
+    
+    @IBAction func pressMe(sender: AnyObject) {
+        
+        self.performSegueWithIdentifier("segue", sender: nil)
     }
 
 
 }
-

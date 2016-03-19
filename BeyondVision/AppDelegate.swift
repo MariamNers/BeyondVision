@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import ChameleonFramework
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,8 +18,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        let appKey = "8l5urli2j24xlt7"      // Set your own app key value here.
+        let appSecret = "nivahs37nlzav5r"   // Set your own app secret value here.
+        
+        let dropboxSession = DBSession(appKey: appKey, appSecret: appSecret, root: kDBRootAppFolder)
+        DBSession.setSharedSession(dropboxSession)
+        
+        
+        
         return true
     }
+    
+
+    func application(application: UIApplication, openURL url: NSURL,
+        sourceApplication: String?, annotation: AnyObject) -> Bool {
+        
+        if DBSession.sharedSession().handleOpenURL(url) {
+            if DBSession.sharedSession().isLinked() {
+                NSNotificationCenter.defaultCenter().postNotificationName("didLinkToDropboxAccountNotification", object: nil)
+                return true
+            }
+        }
+        
+        return false
+    }
+    
 
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
