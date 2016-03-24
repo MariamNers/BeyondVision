@@ -141,7 +141,7 @@ import UIKit
                 CGRect(origin: point,
                     size: CGSize(width: 5.0, height: 5.0)))
             circle.fill()
-            var label = UILabel(frame: CGRectMake(0, 0, 200, 21))
+            let label = UILabel(frame: CGRectMake(0, 0, 200, 21))
             label.center = CGPointMake(160, 284)
             label.textAlignment = NSTextAlignment.Center
             //            label.text = "I'am a test label"

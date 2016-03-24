@@ -133,7 +133,7 @@ class DBController: UIViewController, UITableViewDelegate, UITableViewDataSource
     @IBAction func reloadFiles(sender: AnyObject) {
         
        
-         if let variable = dbRestClient{
+         if let _ = dbRestClient{
             dbRestClient.loadMetadata("/")
             print("success")
         }
@@ -160,7 +160,7 @@ class DBController: UIViewController, UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("idCellFile", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("idCellFile", forIndexPath: indexPath) 
         
         let currentFile: DBMetadata = dropboxMetadata.contents[indexPath.row] as! DBMetadata
         cell.textLabel?.text = currentFile.filename
@@ -201,7 +201,7 @@ class DBController: UIViewController, UITableViewDelegate, UITableViewDataSource
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let selectedFile: DBMetadata = dropboxMetadata.contents[indexPath.row] as! DBMetadata
         
-        let documentsDirectoryPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! NSString
+        let documentsDirectoryPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as NSString
         
         
         // let localFilePath = documentsDirectoryPath.stringByAppendingPathComponent(selectedFile.filename)
@@ -246,7 +246,7 @@ class DBController: UIViewController, UITableViewDelegate, UITableViewDataSource
         }
         
         
-        let documentsDirectoryPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! NSString
+        let documentsDirectoryPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as NSString
         print("The file \(metadata.filename) was downloaded. Content type: \(contentType). The path to it is : \(documentsDirectoryPath)" )
         progressBar.hidden = true
         

@@ -197,7 +197,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="center" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="eLJ-QO-kq7">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" red="0.1899853349" green="0.35768887399999999" blue="0.43821841480000001" alpha="0.91096443969999996" colorSpace="calibratedRGB"/>
                         <rect key="contentStretch" x="0.20000000000000001" y="0.0" width="1" height="1"/>
                         <color key="sectionIndexColor" red="0.1334631741" green="0.1823148429" blue="0.25190103050000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -399,6 +399,9 @@
                                 <state key="normal" image="vol1.png">
                                     <color key="titleShadowColor" red="0.1899853349" green="0.35768887399999999" blue="0.43821841480000001" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="pressMe:" destination="ZNC-A5-U1R" eventType="touchUpInside" id="ugC-nT-xT5"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
