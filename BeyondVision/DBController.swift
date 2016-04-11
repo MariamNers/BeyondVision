@@ -19,8 +19,8 @@ class DBController: UIViewController, UITableViewDelegate, UITableViewDataSource
     @IBOutlet weak var progressBar: UIProgressView!
     var dbRestClient: DBRestClient!
     var dropboxMetadata: DBMetadata!
-    
-    
+    var array: [Int] = []
+    var data: String = ""     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -40,7 +40,7 @@ class DBController: UIViewController, UITableViewDelegate, UITableViewDataSource
         }
         
         
-        
+
         
     }
     
@@ -52,6 +52,7 @@ class DBController: UIViewController, UITableViewDelegate, UITableViewDataSource
             andColors : [ UIColor.flatSandColor(), UIColor.flatBlackColor()]
             
         )}
+    
     
     
     
@@ -195,37 +196,80 @@ class DBController: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     
     func restClient(client: DBRestClient!, loadMetadataFailedWithError error: NSError!) {
+        print("i am at the rest client load metata")
         print(error.description)
     }
+
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
+
+
+        
+        
         let selectedFile: DBMetadata = dropboxMetadata.contents[indexPath.row] as! DBMetadata
         
-        let documentsDirectoryPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as NSString
+        let documentsDirectoryPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
         
+        let localFilePath = (documentsDirectoryPath as NSString).stringByAppendingPathComponent(selectedFile.filename)
         
-        // let localFilePath = documentsDirectoryPath.stringByAppendingPathComponent(selectedFile.filename)
-        
-        //  print("The documents directory path to download to is : \(documentsDirectoryPath)")
-        // print("The local file should be: \(localFilePath)")
-        
-        
-        
-        
-        
-        
+        print("The file to download is at: \(selectedFile.path)")
+        print("The documents directory path to download to is : \(documentsDirectoryPath)")
+        print("The local file should be: \(localFilePath)")
         
         showProgressBar()
         
-        dbRestClient.loadFile(selectedFile.path, intoPath: documentsDirectoryPath as String)
+    
+    
+    
+        
+        dbRestClient.loadFile(selectedFile.path, intoPath: localFilePath as String)
+        
+        
+        
+        
+    
     }
     
+    func dosmth() -> [Int]{
+        
+        
+        let documentsDirectoryPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+        
+        let localFilePath = (documentsDirectoryPath as NSString).stringByAppendingPathComponent("file.txt")
+        
+        
+        
+        do{
+            
+             data = try String(contentsOfFile: localFilePath as String,
+                                  encoding: NSASCIIStringEncoding)
+        //    print(data)
+            
+            print("i am at the do statement")
+            
+            array = data.characters.split(){$0 == ","}.map{
+                Int(String.init($0).stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()))!}
+            
+            
+         //   print(array)
+            
+            
+        }
+        catch let error { print(error) }
+        
+        print(array, "i am here buddy")
+        return array
+   
+        
+    }
     
-    func restClient(client: DBRestClient!, loadedFile destPath: String!, contentType: String!, metadata: DBMetadata!) {
+   
+  
+    
+    
+    func restClient(client: DBRestClient!, loadedFile destPath: String!, contentType: String!, metadata: DBMetadata!){
         
-       
-        
-        
+
         
         let title = "This format is incorrect"
         let message = "You can only download file that is in .txt format"
@@ -237,8 +281,12 @@ class DBController: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         if contentType.rangeOfString("text") != nil{
             print("this is text")
-            self.performSegueWithIdentifier("segue", sender: nil)
+//            dispatch_async(dispatch_get_main_queue(),{
+//                           self.performSegueWithIdentifier("segue", sender: nil)
+//                       });
+          
         }
+            
         else{
             print("this is an error")
             presentViewController(alert, animated: true, completion: nil)
@@ -246,19 +294,15 @@ class DBController: UIViewController, UITableViewDelegate, UITableViewDataSource
         }
         
         
-        let documentsDirectoryPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as NSString
+        let documentsDirectoryPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! NSString
         print("The file \(metadata.filename) was downloaded. Content type: \(contentType). The path to it is : \(documentsDirectoryPath)" )
         progressBar.hidden = true
-        
-      
-        
-        
         
         
         let documentsURL = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
         
         
-        let localFilePath = documentsURL.URLByAppendingPathComponent("Documents")
+        let localFilePath = documentsURL.URLByAppendingPathComponent(metadata.filename)
         
         let checkValidation = NSFileManager.defaultManager()
         
@@ -271,9 +315,18 @@ class DBController: UIViewController, UITableViewDelegate, UITableViewDataSource
             print("FILE NOT AVAILABLE");
         }
         
+        
+        dosmth()
+        
+        
+        self.performSegueWithIdentifier("segue", sender: nil)
+
+        return  
+        
     }
     
     func restClient(client: DBRestClient!, loadFileFailedWithError error: NSError!) {
+        print("i am at the rest client error")
         print(error.description)
         progressBar.hidden = true
     }
@@ -287,9 +340,6 @@ class DBController: UIViewController, UITableViewDelegate, UITableViewDataSource
         progressBar.progress = 0.0
         progressBar.hidden = false
     }
-    
-    
-    
     
     
 }

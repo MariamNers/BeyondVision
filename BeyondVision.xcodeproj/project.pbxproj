@@ -31,8 +31,8 @@
 		8F6CCC851C985A9300E35BD9 /* upload.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F6CCC841C985A9300E35BD9 /* upload.png */; };
 		8F6CCC871C985AA300E35BD9 /* plot.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F6CCC861C985AA300E35BD9 /* plot.png */; };
 		8F6CCC891C985AB400E35BD9 /* guide.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F6CCC881C985AB400E35BD9 /* guide.png */; };
-		8FE6FAA21C9FFC4500038065 /* AudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FE6FAA11C9FFC4500038065 /* AudioKit.framework */; };
-		8FE6FAA31C9FFC4500038065 /* AudioKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8FE6FAA11C9FFC4500038065 /* AudioKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8FE3F0B91CADBFD9005A93B0 /* AudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FE3F0B61CADBFCC005A93B0 /* AudioKit.framework */; };
+		8FE3F0BA1CADBFD9005A93B0 /* AudioKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8FE3F0B61CADBFCC005A93B0 /* AudioKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,16 +50,37 @@
 			remoteGlobalIDString = 8F0DBBCC1C8B48000027A954;
 			remoteInfo = BeyondVision;
 		};
+		8FE3F0B51CADBFCC005A93B0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8FE3F0B01CADBFCB005A93B0 /* AudioKit For iOS.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C42F35001C057E03000E937C;
+			remoteInfo = AudioKit;
+		};
+		8FE3F0B71CADBFCC005A93B0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8FE3F0B01CADBFCB005A93B0 /* AudioKit For iOS.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C43792781C0CE2E0001E9160;
+			remoteInfo = AudioKitTests;
+		};
+		8FE3F0BB1CADBFD9005A93B0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8FE3F0B01CADBFCB005A93B0 /* AudioKit For iOS.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = C42F34FF1C057E03000E937C;
+			remoteInfo = AudioKit;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		8FE6FAA41C9FFC4500038065 /* Embed Frameworks */ = {
+		8FE3F0BD1CADBFD9005A93B0 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				8FE6FAA31C9FFC4500038065 /* AudioKit.framework in Embed Frameworks */,
+				8FE3F0BA1CADBFD9005A93B0 /* AudioKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -99,7 +120,7 @@
 		8F6CCC841C985A9300E35BD9 /* upload.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = upload.png; sourceTree = "<group>"; };
 		8F6CCC861C985AA300E35BD9 /* plot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plot.png; sourceTree = "<group>"; };
 		8F6CCC881C985AB400E35BD9 /* guide.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guide.png; sourceTree = "<group>"; };
-		8FE6FAA11C9FFC4500038065 /* AudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AudioKit.framework; sourceTree = "<group>"; };
+		8FE3F0B01CADBFCB005A93B0 /* AudioKit For iOS.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "AudioKit For iOS.xcodeproj"; path = "../AudioKit-3.0.1/AudioKit/iOS/AudioKit For iOS.xcodeproj"; sourceTree = "<group>"; };
 		BAC4FE2E674B0B2670078BBA /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -111,7 +132,7 @@
 				8F0DBC061C8B48840027A954 /* QuartzCore.framework in Frameworks */,
 				8F0DBC041C8B487A0027A954 /* Security.framework in Frameworks */,
 				8F0DBC021C8B485B0027A954 /* DropboxSDK.framework in Frameworks */,
-				8FE6FAA21C9FFC4500038065 /* AudioKit.framework in Frameworks */,
+				8FE3F0B91CADBFD9005A93B0 /* AudioKit.framework in Frameworks */,
 				132C47D8D1B89F6B6670DC2F /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -153,7 +174,7 @@
 		8F0DBBC41C8B48000027A954 = {
 			isa = PBXGroup;
 			children = (
-				8FE6FAA11C9FFC4500038065 /* AudioKit.framework */,
+				8FE3F0B01CADBFCB005A93B0 /* AudioKit For iOS.xcodeproj */,
 				8F0DBC051C8B48840027A954 /* QuartzCore.framework */,
 				8F0DBC031C8B487A0027A954 /* Security.framework */,
 				8F0DBC011C8B485B0027A954 /* DropboxSDK.framework */,
@@ -221,6 +242,15 @@
 			path = BeyondVisionUITests;
 			sourceTree = "<group>";
 		};
+		8FE3F0B11CADBFCB005A93B0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8FE3F0B61CADBFCC005A93B0 /* AudioKit.framework */,
+				8FE3F0B81CADBFCC005A93B0 /* AudioKitTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -234,11 +264,12 @@
 				8F0DBBCB1C8B48000027A954 /* Resources */,
 				B3EEE564121DD5A0731F7881 /* Embed Pods Frameworks */,
 				A089F6CEF2B609691B0D3585 /* Copy Pods Resources */,
-				8FE6FAA41C9FFC4500038065 /* Embed Frameworks */,
+				8FE3F0BD1CADBFD9005A93B0 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				8FE3F0BC1CADBFD9005A93B0 /* PBXTargetDependency */,
 			);
 			name = BeyondVision;
 			productName = BeyondVision;
@@ -288,7 +319,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = MariamN;
 				TargetAttributes = {
 					8F0DBBCC1C8B48000027A954 = {
@@ -318,6 +349,12 @@
 			mainGroup = 8F0DBBC41C8B48000027A954;
 			productRefGroup = 8F0DBBCE1C8B48000027A954 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 8FE3F0B11CADBFCB005A93B0 /* Products */;
+					ProjectRef = 8FE3F0B01CADBFCB005A93B0 /* AudioKit For iOS.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				8F0DBBCC1C8B48000027A954 /* BeyondVision */,
@@ -326,6 +363,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		8FE3F0B61CADBFCC005A93B0 /* AudioKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = AudioKit.framework;
+			remoteRef = 8FE3F0B51CADBFCC005A93B0 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8FE3F0B81CADBFCC005A93B0 /* AudioKitTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = AudioKitTests.xctest;
+			remoteRef = 8FE3F0B71CADBFCC005A93B0 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		8F0DBBCB1C8B48000027A954 /* Resources */ = {
@@ -454,6 +508,11 @@
 			target = 8F0DBBCC1C8B48000027A954 /* BeyondVision */;
 			targetProxy = 8F0DBBF01C8B48000027A954 /* PBXContainerItemProxy */;
 		};
+		8FE3F0BC1CADBFD9005A93B0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = AudioKit;
+			targetProxy = 8FE3F0BB1CADBFD9005A93B0 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -496,6 +555,8 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = NO;
+				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/**";
@@ -516,7 +577,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(SRCROOT)";
 				MTL_ENABLE_DEBUG_INFO = YES;
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 2;
@@ -543,6 +604,8 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = NO;
+				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/**";
@@ -570,6 +633,7 @@
 				"ARCHS[sdk=*]" = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -589,6 +653,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",

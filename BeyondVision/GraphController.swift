@@ -35,12 +35,8 @@ class GraphController: UIViewController{
         
         graphView.isAccessibilityElement = true
         graphView.accessibilityValue = "This is a visual representation of your data output in a graph. Press play to hear the sound of what it looks like"
-        
-        
-     
-        
+
         maxLabel.text = "\(graphView.graphPoints.maxElement()!)"
-        ymaxpoint.text = "\(graphView.graphPoints2.maxElement()!)"
         
         
         button.isAccessibilityElement = true
@@ -55,42 +51,7 @@ class GraphController: UIViewController{
         
 
             }
-    
-    
-    func somefunc() -> [Int] {
-        
-        let documentsDirectoryPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as NSString
-        
-        print(documentsDirectoryPath)
-        
-        
-        var newarray = [Int]()
-        
-        do{
-            let data = try String(contentsOfFile: documentsDirectoryPath as String,
-                encoding: NSASCIIStringEncoding)
-            print(data)
-            
-            
-            
-             newarray = data.characters.split(){$0 == ","}.map{
-                Int(String.init($0).stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()))!}
-            
-            
-            print(newarray)
-            
-            
-        }
-        catch{
-            
-            print("error")
-        }
-        
-        
-        return newarray
-       
-        
-    }
+
     
     @IBAction func pressMe(sender: UIButton) {
         let image : UIImage = UIImage(named:"mute.png")!
@@ -99,7 +60,7 @@ class GraphController: UIViewController{
         
        
         
-        let volume = AKOperation.sineWave(frequency:0.8).scale(minimum: 0.3, maximum: 0.3)
+        let volume = AKOperation.sineWave(frequency:6.8).scale(minimum: 0.3, maximum: 0.3)
         
         let minimum = Double(10)
         let maximum = Double(500)
@@ -111,7 +72,8 @@ class GraphController: UIViewController{
 
         
         if oscillatorNode.isPlaying {
-
+            
+            print("am i here??")
             oscillatorNode.stop()
             sender.setImage(image, forState: .Normal)
 
@@ -122,12 +84,16 @@ class GraphController: UIViewController{
             oscillatorNode.start()
             sender.setImage(image2, forState: .Normal)
             print("I am here")
-            sleep(2)
+            usleep(2900000)
             oscillatorNode.stop()
 
         }
         
         AudioKit.stop()
+        
+        AKPlaygroundLoop (every: 0.12){
+        
+        }
 
     }
     
