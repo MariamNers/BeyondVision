@@ -10,28 +10,27 @@ import UIKit
 
 @IBDesignable class GraphPlotter: UIView {
     
+  
     
-    var graphPoints:[Int] = DBController().dosmth()
-    var graphPoints2:[Int] = DBController().dosmth()
+    var graphPoints:[Int] = DBController().dosmth()!
+    var graphPoints2:[Int] = DBController().dosmth()!
+    
+   
+    
     
     //1 - the properties for the gradient
     var startColor: UIColor = UIColor.redColor()
     var endColor: UIColor = UIColor.greenColor()
     
-    func plotGraphPoints(gpArray1 : [Int], andMorePoints gpArray2: [Int] ) {
-        
-        print("Old Values", self.graphPoints)
-        self.graphPoints = gpArray1
-        self.graphPoints2 = gpArray2
-        print("New values", self.graphPoints)
-        
-        self.setNeedsDisplay()
-    }
+
     
    
     
     override func drawRect(rect: CGRect) {
-
+        
+    
+        
+        
         //print(graphPoints)
         let width = rect.width
         let height = rect.height

@@ -19,7 +19,7 @@ class DBController: UIViewController, UITableViewDelegate, UITableViewDataSource
     @IBOutlet weak var progressBar: UIProgressView!
     var dbRestClient: DBRestClient!
     var dropboxMetadata: DBMetadata!
-    var array: [Int] = []
+    var array: [Int]? = []
     var data: String = ""     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,10 +38,7 @@ class DBController: UIViewController, UITableViewDelegate, UITableViewDataSource
             bbiConnect.title = "Disconnect"
             initDropboxRestClient()
         }
-        
-        
 
-        
     }
     
     
@@ -52,10 +49,7 @@ class DBController: UIViewController, UITableViewDelegate, UITableViewDataSource
             andColors : [ UIColor.flatSandColor(), UIColor.flatBlackColor()]
             
         )}
-    
-    
-    
-    
+
     func initDropboxRestClient() {
         dbRestClient = DBRestClient(session: DBSession.sharedSession())
         dbRestClient.delegate = self
@@ -210,7 +204,7 @@ class DBController: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         let documentsDirectoryPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
         
-        let localFilePath = (documentsDirectoryPath as NSString).stringByAppendingPathComponent(selectedFile.filename)
+        let localFilePath = (documentsDirectoryPath as NSString).stringByAppendingPathComponent("test123.txt")
         
         print("The file to download is at: \(selectedFile.path)")
         print("The documents directory path to download to is : \(documentsDirectoryPath)")
@@ -230,41 +224,58 @@ class DBController: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     }
     
-    func dosmth() -> [Int]{
+    func dosmth() -> [Int]? {
         
+        let title = "Your file contains unrecognised characters"
+        let message = "You should only have numbers seperated by a comma in your file. Please check your file again or refer to the instructions"
+        let okText = "OK"
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        let okayButton = UIAlertAction(title: okText, style: UIAlertActionStyle.Cancel, handler: nil)
+        alert.addAction(okayButton)
+
         
         let documentsDirectoryPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
         
-        let localFilePath = (documentsDirectoryPath as NSString).stringByAppendingPathComponent("file.txt")
+        let localFilePath = (documentsDirectoryPath as NSString).stringByAppendingPathComponent("test123.txt")
         
         
         
         do{
             
-             data = try String(contentsOfFile: localFilePath as String,
+            data = try String(contentsOfFile: localFilePath as String,
                                   encoding: NSASCIIStringEncoding)
-        //    print(data)
+            
+            
+        
+            array = data.characters.split(){$0 == ","}.flatMap{
+            (Int(String.init($0).stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())))}
+            
+            if array?.isEmpty == true{
+                print("the array is empty")
+                presentViewController(alert, animated: true, completion: nil)
+                
+            
+            }
+            
+          //  print(data)
             
             print("i am at the do statement")
             
-            array = data.characters.split(){$0 == ","}.map{
-                Int(String.init($0).stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()))!}
-            
-            
-         //   print(array)
-            
-            
         }
-        catch let error { print(error) }
+        
+        
+            
+        catch let error {
+            print(error)
+            print("i am at the error statement hahah")
+        }
         
         print(array, "i am here buddy")
         return array
    
         
     }
-    
-   
-  
     
     
     func restClient(client: DBRestClient!, loadedFile destPath: String!, contentType: String!, metadata: DBMetadata!){
@@ -302,7 +313,7 @@ class DBController: UIViewController, UITableViewDelegate, UITableViewDataSource
         let documentsURL = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
         
         
-        let localFilePath = documentsURL.URLByAppendingPathComponent(metadata.filename)
+        let localFilePath = documentsURL.URLByAppendingPathComponent("test123.txt")
         
         let checkValidation = NSFileManager.defaultManager()
         
