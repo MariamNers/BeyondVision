@@ -25,14 +25,14 @@
 		8F3BA9871C9AB22E00261C55 /* GraphController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F3BA9861C9AB22E00261C55 /* GraphController.swift */; };
 		8F3D4FAD1C9C098F004D2AB4 /* GraphPlotter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F3D4FAC1C9C098E004D2AB4 /* GraphPlotter.swift */; };
 		8F3D4FAF1C9C43CE004D2AB4 /* vol1.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F3D4FAE1C9C43CE004D2AB4 /* vol1.png */; };
-		8F3D4FB11C9CA844004D2AB4 /* mute.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F3D4FB01C9CA844004D2AB4 /* mute.png */; };
+		8F3F4A5F1CC0382D0070E0DA /* AKPlaygroundLoop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F3F4A5E1CC0382D0070E0DA /* AKPlaygroundLoop.swift */; };
 		8F6CCC811C9606F300E35BD9 /* TabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6CCC801C9606F300E35BD9 /* TabController.swift */; };
 		8F6CCC831C98589C00E35BD9 /* test.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F6CCC821C98589C00E35BD9 /* test.png */; };
 		8F6CCC851C985A9300E35BD9 /* upload.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F6CCC841C985A9300E35BD9 /* upload.png */; };
 		8F6CCC871C985AA300E35BD9 /* plot.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F6CCC861C985AA300E35BD9 /* plot.png */; };
 		8F6CCC891C985AB400E35BD9 /* guide.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F6CCC881C985AB400E35BD9 /* guide.png */; };
-		8FE3F0B91CADBFD9005A93B0 /* AudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FE3F0B61CADBFCC005A93B0 /* AudioKit.framework */; };
-		8FE3F0BA1CADBFD9005A93B0 /* AudioKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8FE3F0B61CADBFCC005A93B0 /* AudioKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8FC704391CBFDB0A006A7ECF /* AudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FC704371CBFD9A3006A7ECF /* AudioKit.framework */; };
+		8FC7043A1CBFDB0A006A7ECF /* AudioKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8FC704371CBFD9A3006A7ECF /* AudioKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,27 +50,6 @@
 			remoteGlobalIDString = 8F0DBBCC1C8B48000027A954;
 			remoteInfo = BeyondVision;
 		};
-		8FE3F0B51CADBFCC005A93B0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 8FE3F0B01CADBFCB005A93B0 /* AudioKit For iOS.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = C42F35001C057E03000E937C;
-			remoteInfo = AudioKit;
-		};
-		8FE3F0B71CADBFCC005A93B0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 8FE3F0B01CADBFCB005A93B0 /* AudioKit For iOS.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = C43792781C0CE2E0001E9160;
-			remoteInfo = AudioKitTests;
-		};
-		8FE3F0BB1CADBFD9005A93B0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 8FE3F0B01CADBFCB005A93B0 /* AudioKit For iOS.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = C42F34FF1C057E03000E937C;
-			remoteInfo = AudioKit;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -80,7 +59,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				8FE3F0BA1CADBFD9005A93B0 /* AudioKit.framework in Embed Frameworks */,
+				8FC7043A1CBFDB0A006A7ECF /* AudioKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -114,13 +93,13 @@
 		8F3BA9861C9AB22E00261C55 /* GraphController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphController.swift; sourceTree = "<group>"; };
 		8F3D4FAC1C9C098E004D2AB4 /* GraphPlotter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphPlotter.swift; sourceTree = "<group>"; };
 		8F3D4FAE1C9C43CE004D2AB4 /* vol1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vol1.png; sourceTree = "<group>"; };
-		8F3D4FB01C9CA844004D2AB4 /* mute.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mute.png; sourceTree = "<group>"; };
+		8F3F4A5E1CC0382D0070E0DA /* AKPlaygroundLoop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKPlaygroundLoop.swift; sourceTree = "<group>"; };
 		8F6CCC801C9606F300E35BD9 /* TabController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabController.swift; sourceTree = "<group>"; };
 		8F6CCC821C98589C00E35BD9 /* test.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test.png; sourceTree = "<group>"; };
 		8F6CCC841C985A9300E35BD9 /* upload.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = upload.png; sourceTree = "<group>"; };
 		8F6CCC861C985AA300E35BD9 /* plot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plot.png; sourceTree = "<group>"; };
 		8F6CCC881C985AB400E35BD9 /* guide.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guide.png; sourceTree = "<group>"; };
-		8FE3F0B01CADBFCB005A93B0 /* AudioKit For iOS.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "AudioKit For iOS.xcodeproj"; path = "../AudioKit-3.0.1/AudioKit/iOS/AudioKit For iOS.xcodeproj"; sourceTree = "<group>"; };
+		8FC704371CBFD9A3006A7ECF /* AudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioKit.framework; path = BeyondVision/AudioKit.framework; sourceTree = "<group>"; };
 		BAC4FE2E674B0B2670078BBA /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -129,10 +108,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8FC704391CBFDB0A006A7ECF /* AudioKit.framework in Frameworks */,
 				8F0DBC061C8B48840027A954 /* QuartzCore.framework in Frameworks */,
 				8F0DBC041C8B487A0027A954 /* Security.framework in Frameworks */,
 				8F0DBC021C8B485B0027A954 /* DropboxSDK.framework in Frameworks */,
-				8FE3F0B91CADBFD9005A93B0 /* AudioKit.framework in Frameworks */,
 				132C47D8D1B89F6B6670DC2F /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -174,7 +153,7 @@
 		8F0DBBC41C8B48000027A954 = {
 			isa = PBXGroup;
 			children = (
-				8FE3F0B01CADBFCB005A93B0 /* AudioKit For iOS.xcodeproj */,
+				8FC704371CBFD9A3006A7ECF /* AudioKit.framework */,
 				8F0DBC051C8B48840027A954 /* QuartzCore.framework */,
 				8F0DBC031C8B487A0027A954 /* Security.framework */,
 				8F0DBC011C8B485B0027A954 /* DropboxSDK.framework */,
@@ -200,7 +179,6 @@
 		8F0DBBCF1C8B48000027A954 /* BeyondVision */ = {
 			isa = PBXGroup;
 			children = (
-				8F3D4FB01C9CA844004D2AB4 /* mute.png */,
 				8F3D4FAE1C9C43CE004D2AB4 /* vol1.png */,
 				8F3BA9821C99B52800261C55 /* computer.png */,
 				8F3BA9801C99B51700261C55 /* audiowave.png */,
@@ -211,6 +189,7 @@
 				8F0DBC071C8B48D90027A954 /* BeyondVision-Bridging-Header.h */,
 				8F0DBBD01C8B48000027A954 /* AppDelegate.swift */,
 				8F3BA9841C99DB8100261C55 /* DBController.swift */,
+				8F3F4A5E1CC0382D0070E0DA /* AKPlaygroundLoop.swift */,
 				8F0DBBD21C8B48000027A954 /* ViewController.swift */,
 				8F0DBBD41C8B48000027A954 /* Main.storyboard */,
 				8F6CCC801C9606F300E35BD9 /* TabController.swift */,
@@ -242,15 +221,6 @@
 			path = BeyondVisionUITests;
 			sourceTree = "<group>";
 		};
-		8FE3F0B11CADBFCB005A93B0 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				8FE3F0B61CADBFCC005A93B0 /* AudioKit.framework */,
-				8FE3F0B81CADBFCC005A93B0 /* AudioKitTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -269,7 +239,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				8FE3F0BC1CADBFD9005A93B0 /* PBXTargetDependency */,
 			);
 			name = BeyondVision;
 			productName = BeyondVision;
@@ -349,12 +318,6 @@
 			mainGroup = 8F0DBBC41C8B48000027A954;
 			productRefGroup = 8F0DBBCE1C8B48000027A954 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 8FE3F0B11CADBFCB005A93B0 /* Products */;
-					ProjectRef = 8FE3F0B01CADBFCB005A93B0 /* AudioKit For iOS.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				8F0DBBCC1C8B48000027A954 /* BeyondVision */,
@@ -363,23 +326,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		8FE3F0B61CADBFCC005A93B0 /* AudioKit.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = AudioKit.framework;
-			remoteRef = 8FE3F0B51CADBFCC005A93B0 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		8FE3F0B81CADBFCC005A93B0 /* AudioKitTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = AudioKitTests.xctest;
-			remoteRef = 8FE3F0B71CADBFCC005A93B0 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		8F0DBBCB1C8B48000027A954 /* Resources */ = {
@@ -394,7 +340,6 @@
 				8F3BA9831C99B52800261C55 /* computer.png in Resources */,
 				8F0DBBDB1C8B48000027A954 /* Assets.xcassets in Resources */,
 				8F0DBBD61C8B48000027A954 /* Main.storyboard in Resources */,
-				8F3D4FB11C9CA844004D2AB4 /* mute.png in Resources */,
 				8F3BA9811C99B51700261C55 /* audiowave.png in Resources */,
 				8F6CCC891C985AB400E35BD9 /* guide.png in Resources */,
 			);
@@ -473,6 +418,7 @@
 				8F3BA9871C9AB22E00261C55 /* GraphController.swift in Sources */,
 				8F6CCC811C9606F300E35BD9 /* TabController.swift in Sources */,
 				8F0DBBD31C8B48000027A954 /* ViewController.swift in Sources */,
+				8F3F4A5F1CC0382D0070E0DA /* AKPlaygroundLoop.swift in Sources */,
 				8F3D4FAD1C9C098F004D2AB4 /* GraphPlotter.swift in Sources */,
 				8F0DBBD11C8B48000027A954 /* AppDelegate.swift in Sources */,
 				8F3BA9851C99DB8100261C55 /* DBController.swift in Sources */,
@@ -507,11 +453,6 @@
 			isa = PBXTargetDependency;
 			target = 8F0DBBCC1C8B48000027A954 /* BeyondVision */;
 			targetProxy = 8F0DBBF01C8B48000027A954 /* PBXContainerItemProxy */;
-		};
-		8FE3F0BC1CADBFD9005A93B0 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = AudioKit;
-			targetProxy = 8FE3F0BB1CADBFD9005A93B0 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -637,6 +578,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/BeyondVision",
 				);
 				INFOPLIST_FILE = BeyondVision/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -657,6 +599,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/BeyondVision",
 				);
 				INFOPLIST_FILE = BeyondVision/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

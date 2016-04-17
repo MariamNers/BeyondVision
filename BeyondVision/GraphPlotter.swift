@@ -12,8 +12,8 @@ import UIKit
     
   
     
-    var graphPoints:[Int] = DBController().dosmth()!
-    var graphPoints2:[Int] = DBController().dosmth()!
+    var graphPoints:[Double] = DBController().firstarray()!
+    var graphPoints2:[Double] = DBController().secondarray()!
     
    
     
@@ -28,9 +28,8 @@ import UIKit
     
     override func drawRect(rect: CGRect) {
         
-    
-        
-        
+  
+ 
         //print(graphPoints)
         let width = rect.width
         let height = rect.height
@@ -82,10 +81,10 @@ import UIKit
         let topBorder:CGFloat = 60
         let bottomBorder:CGFloat = 50
         let graphHeight = height - topBorder - bottomBorder
-        let maxValue = graphPoints2.maxElement()!
-        let columnYPoint = { (graphPoint2:Int) -> CGFloat in
+        let maxValue = graphPoints2.maxElement()
+        let columnYPoint = { (graphPoint2:Double) -> CGFloat in
             var y:CGFloat = CGFloat(graphPoint2) /
-                CGFloat(maxValue) * graphHeight
+                CGFloat((maxValue)!) * graphHeight
             y = graphHeight + topBorder - y // Flip the graph
             return y
         }
@@ -130,7 +129,7 @@ import UIKit
         //4 - add the clipping path to the context
         clippingPath.addClip()
         
-        let highestYPoint = columnYPoint(maxValue)
+        let highestYPoint = columnYPoint(maxValue!)
         startPoint = CGPoint(x:margin, y: highestYPoint)
         endPoint = CGPoint(x:margin, y:self.bounds.height)
         

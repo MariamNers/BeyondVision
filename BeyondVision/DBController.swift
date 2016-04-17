@@ -19,26 +19,26 @@ class DBController: UIViewController, UITableViewDelegate, UITableViewDataSource
     @IBOutlet weak var progressBar: UIProgressView!
     var dbRestClient: DBRestClient!
     var dropboxMetadata: DBMetadata!
-    var array: [Int]? = []
+    var array: [Double]! = []
     var data: String = ""     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        tblFiles.delegate = self
-        tblFiles.dataSource = self
-        tblFiles.tableFooterView = UIView()
-        tblFiles.backgroundColor = UIColor.flatSandColor()
-        self.viewY.backgroundColor  = UIColor.flatSandColor()
+        tblFiles?.delegate = self
+        tblFiles?.dataSource = self
+        tblFiles?.tableFooterView = UIView()
+        tblFiles?.backgroundColor = UIColor.flatSandColor()
+        self.viewY?.backgroundColor  = UIColor.flatSandColor()
         
-        progressBar.hidden = true
+        progressBar?.hidden = true
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleDidLinkNotification:", name: "didLinkToDropboxAccountNotification", object: nil)
         
         if DBSession.sharedSession().isLinked() {
-            bbiConnect.title = "Disconnect"
+            bbiConnect?.title = "Disconnect"
             initDropboxRestClient()
         }
-
+        
     }
     
     
@@ -84,45 +84,7 @@ class DBController: UIViewController, UITableViewDelegate, UITableViewDataSource
     }
     
     
-    @IBAction func performAction(sender: AnyObject) {
-        if !DBSession.sharedSession().isLinked() {
-            print("You're not connected to Dropbox")
-            return
-        }
-        
-        let actionSheet = UIAlertController(title: "Upload file", message: "Select file to upload", preferredStyle: UIAlertControllerStyle.ActionSheet)
-        
-        let uploadTextFileAction = UIAlertAction(title: "Upload text file", style: UIAlertActionStyle.Default) { (action) -> Void in
-            
-            let uploadFilename = "testtext.txt"
-            let sourcePath = NSBundle.mainBundle().pathForResource("testtext", ofType: "txt")
-            let destinationPath = "/"
-            
-            self.dbRestClient.uploadFile(uploadFilename, toPath: destinationPath, withParentRev: nil, fromPath: sourcePath)
-            
-            
-        }
-        
-        let uploadImageFileAction = UIAlertAction(title: "Upload image", style: UIAlertActionStyle.Default) { (action) -> Void in
-            let uploadFilename = "nature.jpg"
-            let sourcePath = NSBundle.mainBundle().pathForResource("nature", ofType: "jpg")
-            let destinationPath = "/"
-            
-            self.dbRestClient.uploadFile(uploadFilename, toPath: destinationPath, withParentRev: nil, fromPath: sourcePath)
-        }
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel) { (action) -> Void in
-            
-        }
-        
-        actionSheet.addAction(uploadTextFileAction)
-        actionSheet.addAction(uploadImageFileAction)
-        actionSheet.addAction(cancelAction)
-        
-        presentViewController(actionSheet, animated: true, completion: nil)
-        
-        
-    }
+    
     
     
     @IBAction func reloadFiles(sender: AnyObject) {
@@ -212,10 +174,6 @@ class DBController: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         showProgressBar()
         
-    
-    
-    
-        
         dbRestClient.loadFile(selectedFile.path, intoPath: localFilePath as String)
         
         
@@ -224,16 +182,73 @@ class DBController: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     }
     
-    func dosmth() -> [Int]? {
+    func firstarray() -> [Double]? {
         
-        let title = "Your file contains unrecognised characters"
-        let message = "You should only have numbers seperated by a comma in your file. Please check your file again or refer to the instructions"
+        let title = "Your file is empty"
+        let message = "Please fill in the file with appropriate numbers as per instructions"
+        let okText = "OK"
+        
+        let title1 = "Your file contains unrecognised characters"
+        let message1 = "You should only have numbers seperated by a comma in your file. Please check your file again or refer to the instructions"
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        let okayButton = UIAlertAction(title: okText, style: UIAlertActionStyle.Cancel, handler: nil)
+        alert.addAction(okayButton)
+        let alert1 = UIAlertController(title: title1, message: message1, preferredStyle: UIAlertControllerStyle.Alert)
+        alert1.addAction(okayButton)
+        
+        let documentsDirectoryPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+        
+        let localFilePath = (documentsDirectoryPath as NSString).stringByAppendingPathComponent("test123.txt")
+        
+        
+        do{
+            
+            data = try String(contentsOfFile: localFilePath as String,
+                                  encoding: NSASCIIStringEncoding)
+            
+            if data == "" {
+            
+            print("this file is empty")
+            presentViewController(alert, animated: true, completion: nil)
+
+            }
+            
+            let myStrings = data.componentsSeparatedByCharactersInSet(NSCharacterSet.newlineCharacterSet())
+
+          var trial=myStrings[0].componentsSeparatedByString(",").flatMap{Double($0.stringByTrimmingCharactersInSet(.whitespaceCharacterSet()))}
+            
+           array = trial
+            
+            if array?.isEmpty == true{
+                print("the array is empty")
+                presentViewController(alert1, animated: true, completion: nil)
+            }
+            
+            
+        }
+        
+        
+            
+        catch let error {
+            print(error)
+        }
+        
+        return array
+   
+        
+    }
+    
+    func secondarray() -> [Double]? {
+        
+        let title = "Your file is empty"
+        let message = "Please fill in the file with appropriate numbers as per instructions"
         let okText = "OK"
         
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
         let okayButton = UIAlertAction(title: okText, style: UIAlertActionStyle.Cancel, handler: nil)
         alert.addAction(okayButton)
-
+        
         
         let documentsDirectoryPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
         
@@ -244,38 +259,81 @@ class DBController: UIViewController, UITableViewDelegate, UITableViewDataSource
         do{
             
             data = try String(contentsOfFile: localFilePath as String,
-                                  encoding: NSASCIIStringEncoding)
+                              encoding: NSASCIIStringEncoding)
             
+            let myStrings = data.componentsSeparatedByCharactersInSet(NSCharacterSet.newlineCharacterSet())
             
-        
-            array = data.characters.split(){$0 == ","}.flatMap{
-            (Int(String.init($0).stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())))}
+            let textArr = data.componentsSeparatedByString("\r")
+            let myCount = textArr.count
             
-            if array?.isEmpty == true{
-                print("the array is empty")
-                presentViewController(alert, animated: true, completion: nil)
+            if myCount == 1 {
                 
+                let trial=myStrings[0].componentsSeparatedByString(",").flatMap{Double($0.stringByTrimmingCharactersInSet(.whitespaceCharacterSet()))}
+                
+                array = trial
+            
+            }
+            else{
+                
+                let trial=myStrings[1].componentsSeparatedByString(",").flatMap{Double($0.stringByTrimmingCharactersInSet(.whitespaceCharacterSet()))}
+                print(trial)
+                
+                array = trial
             
             }
             
-          //  print(data)
-            
-            print("i am at the do statement")
-            
         }
-        
-        
             
         catch let error {
             print(error)
-            print("i am at the error statement hahah")
         }
         
-        print(array, "i am here buddy")
         return array
-   
+        
         
     }
+    
+    
+    func arraysize() -> [Double]? {
+        
+        let documentsDirectoryPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+        
+        let localFilePath = (documentsDirectoryPath as NSString).stringByAppendingPathComponent("test123.txt")
+        
+        
+        
+        do{
+            
+            data = try String(contentsOfFile: localFilePath as String,
+                              encoding: NSASCIIStringEncoding)
+            
+            
+            let myStrings = data.componentsSeparatedByCharactersInSet(NSCharacterSet.newlineCharacterSet())
+            
+            
+            
+        var trial = myStrings[0].componentsSeparatedByString(",").flatMap{Double($0.stringByTrimmingCharactersInSet(.whitespaceCharacterSet()))}
+            
+            array = trial
+            trial = myStrings[1].componentsSeparatedByString(",").flatMap{Double($0.stringByTrimmingCharactersInSet(.whitespaceCharacterSet()))}
+            
+            array.appendContentsOf(trial)
+
+            print(array)
+            
+        }
+            
+            
+            
+        catch let error {
+            print(error)
+        }
+        
+        return array
+        
+        
+    }
+
     
     
     func restClient(client: DBRestClient!, loadedFile destPath: String!, contentType: String!, metadata: DBMetadata!){
@@ -326,9 +384,8 @@ class DBController: UIViewController, UITableViewDelegate, UITableViewDataSource
             print("FILE NOT AVAILABLE");
         }
         
-        
-        dosmth()
-        
+        firstarray()!
+        secondarray()!
         
         self.performSegueWithIdentifier("segue", sender: nil)
 
@@ -351,6 +408,9 @@ class DBController: UIViewController, UITableViewDelegate, UITableViewDataSource
         progressBar.progress = 0.0
         progressBar.hidden = false
     }
+    
+   
+
     
     
 }

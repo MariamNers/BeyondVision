@@ -36,7 +36,7 @@ class GraphController: UIViewController{
         graphView.isAccessibilityElement = true
         graphView.accessibilityValue = "This is a visual representation of your data output in a graph. Press play to hear the sound of what it looks like"
 
-        maxLabel.text = "\(graphView.graphPoints.maxElement()!)"
+        maxLabel.text = "\(DBController().arraysize()!.maxElement()!)"
         
         
         button.isAccessibilityElement = true
@@ -54,53 +54,43 @@ class GraphController: UIViewController{
 
     
     @IBAction func pressMe(sender: UIButton) {
-        let image : UIImage = UIImage(named:"mute.png")!
-        let image2 : UIImage = UIImage(named:"vol1.png")!
         
         
-       
+        let data = DBController().firstarray()
         
-        let volume = AKOperation.sineWave(frequency:6.8).scale(minimum: 0.3, maximum: 0.3)
+        var oscillator = AKOscillator()
         
-        let minimum = Double(10)
-        let maximum = Double(500)
-        let frequency = AKOperation.sineWave(frequency: 0.7).scale(minimum: minimum, maximum: maximum)
-        let oscillator = AKOperation.sineWave(frequency: frequency, amplitude: volume)
-        let oscillatorNode = AKOperationGenerator(operation: oscillator)
-        AudioKit.output = oscillatorNode
+        AudioKit.output = oscillator
+        
         AudioKit.start()
-
         
-        if oscillatorNode.isPlaying {
+        let updateRate = 3.0
+        
+        oscillator.rampTime = 1.0/updateRate
+        
+        oscillator.start()
+        
+        var counter = 0
+        
+        AKPlaygroundLoop(frequency: updateRate) {
             
-            print("am i here??")
-            oscillatorNode.stop()
-            sender.setImage(image, forState: .Normal)
-
-        }
-        
-        else{
+            let frequency = data![counter % data!.count] * 50.0 + 1000.0
             
-            oscillatorNode.start()
-            sender.setImage(image2, forState: .Normal)
-            print("I am here")
-            usleep(2900000)
-            oscillatorNode.stop()
+            oscillator.frequency = frequency
+            
+            counter += 1
+           // usleep(290000)
+            
+            if counter == data!.count{
+            
+                oscillator.stop()
+                AudioKit.stop()
 
+            }
         }
-        
-        AudioKit.stop()
-        
-        AKPlaygroundLoop (every: 0.12){
-        
-        }
-
     }
     
     override func viewDidDisappear(animated: Bool) {
 
     }
-
-
-
 }
