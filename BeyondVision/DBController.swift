@@ -20,7 +20,7 @@ class DBController: UIViewController, UITableViewDelegate, UITableViewDataSource
     var dbRestClient: DBRestClient!
     var dropboxMetadata: DBMetadata!
     var array: [Double]! = []
-    var data: String = ""     
+    var data: String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -226,8 +226,8 @@ class DBController: UIViewController, UITableViewDelegate, UITableViewDataSource
             }
             
             
+            
         }
-        
         
             
         catch let error {
@@ -263,8 +263,9 @@ class DBController: UIViewController, UITableViewDelegate, UITableViewDataSource
             
             let myStrings = data.componentsSeparatedByCharactersInSet(NSCharacterSet.newlineCharacterSet())
             
-            let textArr = data.componentsSeparatedByString("\r")
+            let textArr = data.componentsSeparatedByString("\n")
             let myCount = textArr.count
+
             
             if myCount == 1 {
                 
@@ -276,14 +277,14 @@ class DBController: UIViewController, UITableViewDelegate, UITableViewDataSource
             else{
                 
                 let trial=myStrings[1].componentsSeparatedByString(",").flatMap{Double($0.stringByTrimmingCharactersInSet(.whitespaceCharacterSet()))}
-                print(trial)
                 
                 array = trial
             
             }
             
         }
-            
+
+        
         catch let error {
             print(error)
         }
@@ -314,13 +315,27 @@ class DBController: UIViewController, UITableViewDelegate, UITableViewDataSource
             
         var trial = myStrings[0].componentsSeparatedByString(",").flatMap{Double($0.stringByTrimmingCharactersInSet(.whitespaceCharacterSet()))}
             
-            array = trial
-            trial = myStrings[1].componentsSeparatedByString(",").flatMap{Double($0.stringByTrimmingCharactersInSet(.whitespaceCharacterSet()))}
-            
             array.appendContentsOf(trial)
 
-            print(array)
+            let textArr = data.componentsSeparatedByString("\n")
+            let myCount = textArr.count
             
+            
+            if myCount == 1 {
+                
+                let trial=myStrings[0].componentsSeparatedByString(",").flatMap{Double($0.stringByTrimmingCharactersInSet(.whitespaceCharacterSet()))}
+                
+                array.appendContentsOf(trial)
+                
+            }
+            else{
+                
+                let trial=myStrings[1].componentsSeparatedByString(",").flatMap{Double($0.stringByTrimmingCharactersInSet(.whitespaceCharacterSet()))}
+                
+                array.appendContentsOf(trial)
+
+                
+            }
         }
             
             
