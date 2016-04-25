@@ -51,22 +51,22 @@ class TabController : UITableViewController {
             
         )
         
-        switch (indexPath.row){
-        case 0:
-            cell.imageView?.image = image
-            
-            break;
-        case 1:
-            cell.imageView?.image = image1
-            break;
-        case 2:
-            cell.imageView?.image = image2
-            break;
-        case 3:
-            cell.imageView?.image = image3
-            break;
-        default: break;
-        }
+//        switch (indexPath.row){
+//        case 0:
+//            cell.imageView?.image = image
+//            
+//            break;
+//        case 1:
+//            cell.imageView?.image = image1
+//            break;
+//        case 2:
+//            cell.imageView?.image = image2
+//            break;
+//        case 3:
+//            cell.imageView?.image = image3
+//            break;
+//        default: break;
+//        }
         
     }
 

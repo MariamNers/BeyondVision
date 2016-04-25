@@ -40,7 +40,7 @@ class GraphController: UIViewController{
         
         
         button.isAccessibilityElement = true
-        button.accessibilityValue = "Press me to hear the sound. You can always mute the sound by pressing the sound button again"
+       
         
         
         button.layer.cornerRadius = 10;
@@ -92,6 +92,7 @@ class GraphController: UIViewController{
 //            let pan = Double(counter % 21) / 10.0  - 1.0 // [-1...1]
             let pan = sin(Double(counter) / 6.0)
             oscillator.frequency = frequency
+            oscillator.amplitude = 800.0
             panner.pan = pan
             counter += 1
             if counter == data!.count{

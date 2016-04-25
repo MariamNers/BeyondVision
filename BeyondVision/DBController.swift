@@ -37,19 +37,21 @@ class DBController: UIViewController, UITableViewDelegate, UITableViewDataSource
         if DBSession.sharedSession().isLinked() {
             bbiConnect?.title = "Disconnect"
             initDropboxRestClient()
+            dbRestClient.loadMetadata("/")
+            
         }
         
     }
     
     
-     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         cell.backgroundColor = UIColor.init(
             gradientStyle: UIGradientStyle.TopToBottom,
             withFrame: view.frame,
             andColors : [ UIColor.flatSandColor(), UIColor.flatBlackColor()]
             
         )}
-
+    
     func initDropboxRestClient() {
         dbRestClient = DBRestClient(session: DBSession.sharedSession())
         dbRestClient.delegate = self
@@ -60,6 +62,8 @@ class DBController: UIViewController, UITableViewDelegate, UITableViewDataSource
         func handleDidLinkNotification(notification: NSNotification) {
             initDropboxRestClient()
             bbiConnect.title = "Disconnect"
+            dbRestClient.loadMetadata("/")
+            
         }
     }
     
@@ -74,13 +78,17 @@ class DBController: UIViewController, UITableViewDelegate, UITableViewDataSource
     @IBAction func connectToDropbox(sender: AnyObject) {
         if !DBSession.sharedSession().isLinked() {
             DBSession.sharedSession().linkFromController(self)
+            print("tryin to connect to DB")
+            bbiConnect.title = "Disconnect"
+            
         }
         else {
             DBSession.sharedSession().unlinkAll()
             bbiConnect.title = "Connect"
             dbRestClient = nil
-            
         }
+        
+        
     }
     
     
@@ -89,12 +97,12 @@ class DBController: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     @IBAction func reloadFiles(sender: AnyObject) {
         
-       
-         if let _ = dbRestClient{
+        
+        if let _ = dbRestClient{
             dbRestClient.loadMetadata("/")
             print("success")
         }
-         else{
+        else{
             print("failure")
         }
         
@@ -117,7 +125,7 @@ class DBController: UIViewController, UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("idCellFile", forIndexPath: indexPath) 
+        let cell = tableView.dequeueReusableCellWithIdentifier("idCellFile", forIndexPath: indexPath)
         
         let currentFile: DBMetadata = dropboxMetadata.contents[indexPath.row] as! DBMetadata
         cell.textLabel?.text = currentFile.filename
@@ -155,11 +163,42 @@ class DBController: UIViewController, UITableViewDelegate, UITableViewDataSource
         print("i am at the rest client load metata")
         print(error.description)
     }
-
+    
+    func errorhandling(){
+        print("i am trying to handle the error")
+        let title = "You are not connected to DropBox"
+        let message = "Please go back to the main page and try to log in again"
+        let okText = "OK"
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        let okayButton = UIAlertAction(title: okText, style: UIAlertActionStyle.Cancel, handler: nil)
+        alert.addAction(okayButton)
+        self.presentViewController(alert, animated: true, completion: nil)
+        print("i finished handling the error")
+        
+    }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
-
-
+        
+        let title = "You are not connected to DropBox"
+        let message = "Please go back to the main page and try to log in again"
+        let okText = "OK"
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        let okayButton = UIAlertAction(title: okText, style: UIAlertActionStyle.Cancel, handler: nil)
+        alert.addAction(okayButton)
+        
+        
+        if dbRestClient == nil{
+            print("please refresh me")
+            errorhandling()
+            return
+            
+        }
+        else{
+            print("i am in the else statement")
+            
+        }
         
         
         let selectedFile: DBMetadata = dropboxMetadata.contents[indexPath.row] as! DBMetadata
@@ -170,7 +209,7 @@ class DBController: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         print("The file to download is at: \(selectedFile.path)")
         print("The documents directory path to download to is : \(documentsDirectoryPath)")
-        print("The local file should be: \(localFilePath)")
+        print("The local file should    be: \(localFilePath)")
         
         showProgressBar()
         
@@ -179,7 +218,7 @@ class DBController: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         
         
-    
+        
     }
     
     func firstarray() -> [Double]? {
@@ -205,20 +244,20 @@ class DBController: UIViewController, UITableViewDelegate, UITableViewDataSource
         do{
             
             data = try String(contentsOfFile: localFilePath as String,
-                                  encoding: NSASCIIStringEncoding)
+                              encoding: NSASCIIStringEncoding)
             
             if data == "" {
-            
-            print("this file is empty")
-            presentViewController(alert, animated: true, completion: nil)
-
+                
+                print("this file is empty")
+                presentViewController(alert, animated: true, completion: nil)
+                
             }
             
             let myStrings = data.componentsSeparatedByCharactersInSet(NSCharacterSet.newlineCharacterSet())
-
-          var trial=myStrings[0].componentsSeparatedByString(",").flatMap{Double($0.stringByTrimmingCharactersInSet(.whitespaceCharacterSet()))}
             
-           array = trial
+            var trial=myStrings[0].componentsSeparatedByString(",").flatMap{Double($0.stringByTrimmingCharactersInSet(.whitespaceCharacterSet()))}
+            
+            array = trial
             
             if array?.isEmpty == true{
                 print("the array is empty")
@@ -228,14 +267,14 @@ class DBController: UIViewController, UITableViewDelegate, UITableViewDataSource
             
             
         }
-        
+            
             
         catch let error {
             print(error)
         }
         
         return array
-   
+        
         
     }
     
@@ -244,10 +283,13 @@ class DBController: UIViewController, UITableViewDelegate, UITableViewDataSource
         let title = "Your file is empty"
         let message = "Please fill in the file with appropriate numbers as per instructions"
         let okText = "OK"
+        let title1 = "Your file has more lines than it needs to"
         
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
         let okayButton = UIAlertAction(title: okText, style: UIAlertActionStyle.Cancel, handler: nil)
         alert.addAction(okayButton)
+        let alert2 = UIAlertController(title: title1, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        alert2.addAction(okayButton)
         
         
         let documentsDirectoryPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
@@ -265,26 +307,31 @@ class DBController: UIViewController, UITableViewDelegate, UITableViewDataSource
             
             let textArr = data.componentsSeparatedByString("\n")
             let myCount = textArr.count
-
+            print(myCount)
             
             if myCount == 1 {
                 
                 let trial=myStrings[0].componentsSeparatedByString(",").flatMap{Double($0.stringByTrimmingCharactersInSet(.whitespaceCharacterSet()))}
                 
                 array = trial
-            
+                
             }
-            else{
+            else if myCount == 2 {
                 
                 let trial=myStrings[1].componentsSeparatedByString(",").flatMap{Double($0.stringByTrimmingCharactersInSet(.whitespaceCharacterSet()))}
                 
                 array = trial
-            
+                
             }
-            
+                
+            else{
+                presentViewController(alert2, animated: true, completion: nil)
+                
+            }
+            print(array)
         }
-
-        
+            
+            
         catch let error {
             print(error)
         }
@@ -313,10 +360,10 @@ class DBController: UIViewController, UITableViewDelegate, UITableViewDataSource
             
             
             
-        var trial = myStrings[0].componentsSeparatedByString(",").flatMap{Double($0.stringByTrimmingCharactersInSet(.whitespaceCharacterSet()))}
+            var trial = myStrings[0].componentsSeparatedByString(",").flatMap{Double($0.stringByTrimmingCharactersInSet(.whitespaceCharacterSet()))}
             
             array.appendContentsOf(trial)
-
+            
             let textArr = data.componentsSeparatedByString("\n")
             let myCount = textArr.count
             
@@ -333,7 +380,7 @@ class DBController: UIViewController, UITableViewDelegate, UITableViewDataSource
                 let trial=myStrings[1].componentsSeparatedByString(",").flatMap{Double($0.stringByTrimmingCharactersInSet(.whitespaceCharacterSet()))}
                 
                 array.appendContentsOf(trial)
-
+                
                 
             }
         }
@@ -348,12 +395,12 @@ class DBController: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         
     }
-
+    
     
     
     func restClient(client: DBRestClient!, loadedFile destPath: String!, contentType: String!, metadata: DBMetadata!){
         
-
+        
         
         let title = "This format is incorrect"
         let message = "You can only download file that is in .txt format"
@@ -365,10 +412,10 @@ class DBController: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         if contentType.rangeOfString("text") != nil{
             print("this is text")
-//            dispatch_async(dispatch_get_main_queue(),{
-//                           self.performSegueWithIdentifier("segue", sender: nil)
-//                       });
-          
+            //            dispatch_async(dispatch_get_main_queue(),{
+            //                           self.performSegueWithIdentifier("segue", sender: nil)
+            //                       });
+            
         }
             
         else{
@@ -403,8 +450,8 @@ class DBController: UIViewController, UITableViewDelegate, UITableViewDataSource
         secondarray()!
         
         self.performSegueWithIdentifier("segue", sender: nil)
-
-        return  
+        
+        return
         
     }
     
@@ -424,8 +471,8 @@ class DBController: UIViewController, UITableViewDelegate, UITableViewDataSource
         progressBar.hidden = false
     }
     
-   
-
+    
+    
     
     
 }
